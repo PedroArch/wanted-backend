@@ -16,6 +16,8 @@ export default {
       opening_hours,
       open_on_weekends,
     } = req.body
+
+    const user = JSON.parse(req.params.userid)
   
     const freelancersRepository = getRepository(Freelancer);
 
@@ -33,7 +35,8 @@ export default {
       type,
       opening_hours,
       open_on_weekends,
-      images
+      images,
+      user,
     };
 
     const schema = Yup.object().shape({
@@ -45,6 +48,7 @@ export default {
       type: Yup.string().required(),
       opening_hours: Yup.string().required(),
       open_on_weekends: Yup.boolean().required(),
+      user: Yup.number().required(),
       images: Yup.array(Yup.object().shape({
         path: Yup.string().required()
       }))
@@ -66,7 +70,7 @@ export default {
     const freelancersRepository = getRepository(Freelancer);
 
     const freelancers = await freelancersRepository.find({
-      relations: ['images']
+      relations: ['images', 'user']
     });
 
     return res.status(200).json(freelancerView.renderMany(freelancers));
@@ -78,7 +82,7 @@ export default {
     const { id } = req.params
 
     const freelancer = await freelancersRepository.findOneOrFail(id, {
-      relations: ['images']
+      relations: ['images', 'user']
     });
 
     return res.status(200).json(freelancerView.render(freelancer));

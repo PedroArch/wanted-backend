@@ -12,11 +12,11 @@ const routes = Router();
 const upload = multer(uploadConfig)
 
 
-routes.post('/users', UsersControllers.create);
+routes.post('/users', upload.single('avatar'), UsersControllers.create);
 routes.get('/users', UsersControllers.index);
 routes.get('/users/:id', UsersControllers.show);
 
-routes.post('/freelancers', upload.array('images'), FreelancersControllers.create);
+routes.post('/freelancers/:userid', upload.array('images'), FreelancersControllers.create);
 routes.get('/freelancers', FreelancersControllers.index);
 routes.get('/freelancers/:id', FreelancersControllers.show);
 

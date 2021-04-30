@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import Freelancer from './Freelancer'
 
 @Entity('users')
 export default class User {
@@ -25,4 +26,9 @@ export default class User {
 
   @Column()
   avatar: string;
+
+  @OneToOne(() => Freelancer, freelancer => freelancer.user, {
+    cascade:['insert', 'update']
+  })
+  freelancer: Freelancer;
 }

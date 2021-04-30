@@ -20,7 +20,7 @@ export class createUsers1619556750965 implements MigrationInterface {
       { name: "city", type: "varchar"},
       { name: "state", type: "varchar"},
       { name: "birthday", type: "date"},
-      { name: "avatar", type: "varchar"}, 
+      { name: "avatar", type: "varchar"},
       ],
     }))
   }

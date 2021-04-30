@@ -1,5 +1,7 @@
-import { Response, Request } from 'express';
+import { Response, Request, request } from 'express';
 import { getRepository } from 'typeorm';
+import usersView from '../views/users_view'
+import * as Yup from 'yup';
 
 import User from '../models/User';
 
@@ -10,7 +12,7 @@ export default {
 
     const users = await usersRepository.find();
 
-    return res.status(200).json(users);
+    return res.status(200).json(usersView.renderMany(users));
   },
 
   async show(req: Request, res: Response) {
@@ -19,7 +21,7 @@ export default {
 
     const user = await usersRepository.findOneOrFail(id)
 
-    return res.status(200).json(user);
+    return res.status(200).json(usersView.render(user));
   },
 
   async create(req: Request, res: Response) {
@@ -30,12 +32,14 @@ export default {
       city,
       state,
       birthday,
-      avatar
      } = req.body;
   
      const usersRepository = getRepository(User);
-  
-     const user = usersRepository.create({
+
+     const requestImage = req.file as Express.Multer.File; 
+     const avatar = requestImage.filename;
+
+     const data = {
       first_name, 
       last_name,
       email,
@@ -43,7 +47,24 @@ export default {
       state,
       birthday,
       avatar
-     });
+     };
+
+     const schema = Yup.object().shape({
+       first_name: Yup.string().required(),
+       last_name: Yup.string().required(),
+       email: Yup.string().required(),
+       city: Yup.string().required(),
+       state: Yup.string().required(),
+       birthday: Yup.string().required(),
+       avatar: Yup.string().required(), 
+     })
+
+     await schema.validate(data, {
+       abortEarly: false,
+     })
+
+     
+     const user = usersRepository.create(data);
   
      await usersRepository.save(user);
   

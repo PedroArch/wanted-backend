@@ -49,7 +49,21 @@ export class createFreelancers1619627891919 implements MigrationInterface {
                 name: 'open_on_weekends',
                 type: 'boolean'
               },
-            ],  
+              {
+                name: 'user_id',
+                type: 'integer',
+              }
+            ],
+             foreignKeys: [
+          {
+            name: 'FreelancerUser',
+            columnNames: ['user_id'],
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            onUpdate:'CASCADE',
+            onDelete:'CASCADE'
+          }
+        ]  
           }))
     }
 
