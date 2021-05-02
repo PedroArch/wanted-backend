@@ -52,14 +52,14 @@ export default {
      };
 
      const schema = Yup.object().shape({
-       first_name: Yup.string().required(),
-       last_name: Yup.string().required(),
-       email: Yup.string().required(),
-       pasword: Yup.string().required().min(3),
-       city: Yup.string().required(),
-       state: Yup.string().required(),
-       birthday: Yup.string().required(),
-       avatar: Yup.string().required(), 
+       first_name: Yup.string("Formato de dado inválido").required("first_name é obrigatório"),
+       last_name: Yup.string().required("last_name é obrigatório"),
+       email: Yup.string().required("email é obrigatório"),
+       password: Yup.string().required("password é obrigatório").min(3, "Mínimo de 3 caracteres"),
+       city: Yup.string().required("city é obrigatório"),
+       state: Yup.string().required("state é obrigatório"),
+       birthday: Yup.string().required("birthday é obrigatório"),
+       avatar: Yup.string().required("avatar é obrigatório"), 
      })
 
      await schema.validate(data, {
