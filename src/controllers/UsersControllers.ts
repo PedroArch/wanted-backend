@@ -55,7 +55,7 @@ export default {
        first_name: Yup.string().required(),
        last_name: Yup.string().required(),
        email: Yup.string().required(),
-       pasword: Yup.string().required(),
+       pasword: Yup.string().required().min(3),
        city: Yup.string().required(),
        state: Yup.string().required(),
        birthday: Yup.string().required(),
