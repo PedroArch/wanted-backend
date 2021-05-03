@@ -52,7 +52,7 @@ export default {
      };
 
      const schema = Yup.object().shape({
-       first_name: Yup.string("Formato de dado inválido").required("first_name é obrigatório"),
+       first_name: Yup.string().required("first_name é obrigatório"),
        last_name: Yup.string().required("last_name é obrigatório"),
        email: Yup.string().required("email é obrigatório"),
        password: Yup.string().required("password é obrigatório").min(3, "Mínimo de 3 caracteres"),

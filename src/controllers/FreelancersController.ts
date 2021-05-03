@@ -40,17 +40,17 @@ export default {
     };
 
     const schema = Yup.object().shape({
-      about: Yup.string().required(),
-      portfolio: Yup.string().required(),
-      latitude: Yup.number().required(),
-      longitude: Yup.number().required(),
-      mobile: Yup.string().required(),
-      type: Yup.string().required(),
-      opening_hours: Yup.string().required(),
-      open_on_weekends: Yup.boolean().required(),
-      user: Yup.number().required(),
+      about: Yup.string().required("about é obrigatório"),
+      portfolio: Yup.string(),
+      latitude: Yup.number().required("latitude é obrigatório"),
+      longitude: Yup.number().required("longitude é obrigatório"),
+      mobile: Yup.string().required("mobile é obrigatório"),
+      type: Yup.string().required("type é obrigatório"),
+      opening_hours: Yup.string().required("opening_hours é obrigatório"),
+      open_on_weekends: Yup.boolean().required("open_on_weekends é obrigatório"),
+      user: Yup.number().required("user_id é obrigatório"),
       images: Yup.array(Yup.object().shape({
-        path: Yup.string().required()
+        path: Yup.string()
       }))
     });
 
