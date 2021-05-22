@@ -1,5 +1,4 @@
 import User from '../models/User'
-import imagesView from '../views/images_view'
 
 export default {
   render(user: User){

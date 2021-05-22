@@ -13,7 +13,10 @@ export default {
       type: freelancer.type,
       opening_hours: freelancer.opening_hours,
       open_on_weekends: freelancer.open_on_weekends,
-      user: freelancer.user,
+      user: {
+        ...freelancer.user,
+        avatar: `http://localhost:3333/uploads/${freelancer.user.avatar}`
+      },
       images: imagesView.renderMany(freelancer.images),
     };
   },
