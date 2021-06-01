@@ -79,11 +79,11 @@ export default {
     const data = req.body
     const { id } = req.params
 
-    const usersRepository = await getRepository(User).findOne(id);
+    const userRepository = await getRepository(User).findOne(id);
  
-    if (usersRepository) {
-      getRepository(User).merge(usersRepository, data)
-      const results = await getRepository(User).save(usersRepository)
+    if (userRepository) {
+      getRepository(User).merge(userRepository, data)
+      const results = await getRepository(User).save(userRepository)
       return res.status(200).json(results)
     }
 
