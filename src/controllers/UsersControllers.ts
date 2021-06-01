@@ -72,5 +72,21 @@ export default {
      await usersRepository.save(user);
   
      return res.status(201).json(user);
+  },
+
+  async update (req: Request, res: Response) {
+
+    const data = req.body
+    const { id } = req.params
+
+    const usersRepository = await getRepository(User).findOne(id);
+ 
+    if (usersRepository) {
+      getRepository(User).merge(usersRepository, data)
+      const results = await getRepository(User).save(usersRepository)
+      return res.status(200).json(results)
+    }
+
+    res.status(404).json({msg: 'Not User found'})
   }
 }
