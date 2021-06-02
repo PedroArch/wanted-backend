@@ -9,6 +9,7 @@ export default {
       email: user.email,
       city: user.city,
       state: user.state,
+      password: user.password,
       birthday: user.birthday,
       avatar: `http://localhost:3333/uploads/${user.avatar}`,
     };
