@@ -13,6 +13,7 @@ const upload = multer(uploadConfig)
 
 
 routes.get('/users', UsersControllers.index);
+routes.post('/login', UsersControllers.login);
 routes.get('/users/:id', UsersControllers.show);
 routes.post('/users', upload.single('avatar'), UsersControllers.create);
 routes.put('/users/:id', upload.single('avatar'), UsersControllers.update);

@@ -88,5 +88,22 @@ export default {
     }
 
     res.status(404).json({msg: 'Not User found'})
+  },
+
+  async login (req: Request, res: Response) {
+
+    const { email, password } = req.body
+
+    const user = await getRepository(User).findOne({email: email});
+  
+    if (!user) {
+      return res.status(401).json({msg: "Not User found"})
+    }
+
+    if (user.password === password) {
+      return res.status(200).json(usersView.render(user))
+    }
+
+    res.status(401).json({msg: 'User unauthenticated'})
   }
 }
